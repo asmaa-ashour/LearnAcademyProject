@@ -47,7 +47,7 @@ class SignUpControllerImp extends SignUpController {
           print(response['success']);
           print("$response ...................status");
           // data.addAll((response['data']));
-          Get.offNamed("/home");
+          Get.offNamed("/login");
         } else if (response['message'] == "your email does not exist :(") {
           Get.snackbar("Warning", "The email has already been taken.");
         } else if (response['message'] ==

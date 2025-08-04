@@ -4,6 +4,7 @@ class AppLink {
 
  // =============================Auth=====================//
   static const String signUp = "$serverLink/sign-up";
+  static const String login = "$serverLink/login";
 
 
   //===================== images ===========================back

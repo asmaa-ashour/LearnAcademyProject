@@ -51,6 +51,14 @@ if(type=="password"){
     if (val.isEmpty) {
       return "can't be Empty";
     }
+  if (type =="login"){
+    if (val.isEmpty) {
+      return 'not valid full name';
+    }
+    else{
+      return 'Not Correct';
+    }
+  }
 
     if (val.length < min) {
       return "can't be less than $min";

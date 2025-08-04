@@ -5,7 +5,7 @@ class AppRoute {
   static const String logIn = "/logIn";
   static const String splash = "/splash";
   static const String lang = "/lang";
-  static const String hone = "/home";
+  static const String home = "/home";
 
 
   /////////////////////////////////////////// قديم///////////////////////
@@ -23,7 +23,6 @@ class AppRoute {
   static const String checkOut = "/checkout";
   static const String pageAfterSignUpandLogin = '/PageAfterSignUpandLogin';
   static const String resturantPage = '/resturantpage';
-  static const String home = "/home";
   static const String trips = "/trips";
   static const String favorite = "/favorite";
   static const String booking = "/booking";
