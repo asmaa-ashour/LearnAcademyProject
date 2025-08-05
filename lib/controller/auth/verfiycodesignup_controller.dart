@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../core/class/status_request.dart';
-import '../../core/constant/constant_data.dart';
 import '../../core/constant/routs.dart';
 import '../../core/function/handling_data.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
@@ -17,20 +16,27 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   VerfiyCodeSignUpData verfiyCodeSignUpData = VerfiyCodeSignUpData(Get.find());
 
 
-  //int? id;
-  // String? email;
+  late int id;
+  late String emailFromResponse;
+  late String activationCode;
+
   StatusRequest statusRequest = StatusRequest.none ;
 
   @override
-  checkCode() {}
-
+  void onInit() {
+    id = Get.arguments['id'];
+    emailFromResponse = Get.arguments['email'];
+    activationCode = Get.arguments['activation_code'];
+    super.onInit();
+  }
   @override
   goToSuccessSignUp(verfiyCodeSignUp) async {
     statusRequest = StatusRequest.loading;
     update();
-    var response = await verfiyCodeSignUpData.postdata(id!, verfiyCodeSignUp);
+    var response = await verfiyCodeSignUpData.postdata(id, verfiyCodeSignUp
+    );
     print(id);
-    print(verfiyCodeSignUp);
+    print(activationCode);
 
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
@@ -46,14 +52,15 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
     update();
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   reSend(){
-    print("Resending code for id=$id, email=$email");
-    verfiyCodeSignUpData.resendData(id!,email!);
+    print("Resending code for id=$id, email=$emailFromResponse");
+    verfiyCodeSignUpData.resendData(id,emailFromResponse);
+  }
+
+  @override
+  checkCode() {
+
   }
 
 }

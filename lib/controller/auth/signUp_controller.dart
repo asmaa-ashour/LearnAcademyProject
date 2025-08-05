@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:second/core/class/status_request.dart';
 import 'package:second/core/constant/routs.dart';
-import '../../core/constant/constant_data.dart';
 import '../../core/function/handling_data.dart';
 import '../../data/datasource/remote/auth/sinup_data.dart';
 
@@ -14,6 +13,9 @@ abstract class SignUpController extends GetxController {
 
 class SignUpControllerImp extends SignUpController {
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
+ late String activationCode;
+ late String emailFromResponse;
+ late int id;
 
   late TextEditingController email;
   late TextEditingController password;
@@ -44,11 +46,24 @@ class SignUpControllerImp extends SignUpController {
       if (StatusRequest.success == statusRequest) {
         print(" I now in controller");
         if (response['success'] == true) {
-          Get.snackbar("note", "Your account has been created successfully please activate your account now .");
           print(response['success']);
           Get.snackbar("Done", "Your account has been created successfully please activate your account now");
 
-          id=response['data']['id'];
+        //  id=response['data']['id'];
+          //////////////////////////////////////////////////////////////////
+          // بعد نجاح التسجيل، احصل على القيم من response:
+           id = response["data"]["id"];
+          emailFromResponse = response["data"]["email"];
+           activationCode = response["data"]["activation_code"];
+
+
+// ثم انتقل إلى صفحة التفعيل مع تمرير القيم:
+          Get.toNamed(AppRoute.verfiyCode, arguments: {
+            "id": id,
+            "email": emailFromResponse,
+            "activation_code": activationCode
+          });
+          ///////////////////////////////////////////////////////////////
           print(response['data']['id']);
           print("$response ...................status");
           // data.addAll((response['data']));

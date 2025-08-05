@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:second/core/constant/routs.dart';
 import 'package:second/view/screen/auth/Login.dart';
+import 'package:second/view/screen/auth/success_signup.dart';
 import 'package:second/view/screen/auth/verifycodesignup.dart';
 import 'package:second/view/screen/home_page.dart';
 import 'package:second/view/screen/language.dart';
@@ -17,10 +18,11 @@ class AppPages {
     AppRoute.logIn: (context) => const Login(),
     AppRoute.signUp: (context) => const SignUp(),
     AppRoute.verfiyCode: (context) => const VerfiyCodeSignUp(),
+    AppRoute.successSignUp: (context) => const SuccessSignUp(),
     AppRoute.home: (context) => const HomePage(),
   };
 }
-
+//koMkMc  dsa@145A
 /*
   static final routes = [
     GetPage(

@@ -1,3 +1,3 @@
 dynamic Token = "";
-int? id;
-String? email;
+//int? id;
+//String? email;

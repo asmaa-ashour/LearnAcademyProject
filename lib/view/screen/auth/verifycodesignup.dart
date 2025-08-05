@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import '../../../controller/auth/verfiycodesignup_controller.dart';
@@ -47,6 +48,8 @@ class VerfiyCodeSignUp extends StatelessWidget {
                         //set to true to show as box or false to show as dash
                         showFieldAsBox: true,
                         //runs when a code is typed in
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9]"))],
+
                         onCodeChanged: (String code) {
                           //handle validation or checks here
                         },
