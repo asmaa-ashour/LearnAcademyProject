@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:second/core/constant/routs.dart';
-import 'package:second/view/screen/Login.dart';
+import 'package:second/view/screen/auth/Login.dart';
+import 'package:second/view/screen/auth/verifycodesignup.dart';
 import 'package:second/view/screen/home_page.dart';
 import 'package:second/view/screen/language.dart';
 import 'package:second/view/screen/onboarding.dart';
-import 'package:second/view/screen/siginUp.dart';
+import 'package:second/view/screen/auth/siginUp.dart';
 import 'package:second/view/screen/splash.dart';
 class AppPages {
   static const initial = '/logIn';
@@ -15,6 +16,7 @@ class AppPages {
     AppRoute.onBoarding: (context) => const OnBoarding(),
     AppRoute.logIn: (context) => const Login(),
     AppRoute.signUp: (context) => const SignUp(),
+    AppRoute.verfiyCode: (context) => const VerfiyCodeSignUp(),
     AppRoute.home: (context) => const HomePage(),
   };
 }

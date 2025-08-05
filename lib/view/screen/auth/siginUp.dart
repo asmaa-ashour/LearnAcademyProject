@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:second/core/function/validinput.dart';
 import 'package:second/view/widget/auth/CustomeButtonAuth.dart';
-import '../../controller/auth/signUp_controller.dart';
-import '../../core/class/handlingdataview.dart';
-import '../../core/constant/imageassets.dart';
-import '../widget/auth/CustomArrow.dart';
-import '../widget/auth/CustomBackgroundPainter.dart';
-import '../widget/auth/_buildTextField.dart';
-import '../widget/auth/image_signup_login.dart';
+import '../../../controller/auth/signUp_controller.dart';
+import '../../../core/class/handlingdataview.dart';
+import '../../../core/constant/imageassets.dart';
+import '../../widget/auth/CustomArrow.dart';
+import '../../widget/auth/CustomBackgroundPainter.dart';
+import '../../widget/auth/_buildTextField.dart';
+import '../../widget/auth/image_signup_login.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});

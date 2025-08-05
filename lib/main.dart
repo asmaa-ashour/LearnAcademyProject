@@ -24,12 +24,13 @@ class MyApp extends StatelessWidget {
         translations: Translation(),
       debugShowCheckedModeBanner: false,
      locale:controller.language,
-      theme: ThemeData(
-        textTheme: const TextTheme(
-            headlineMedium:
-                TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        primarySwatch: Colors.blue,
-      ),
+      theme: controller.appTheme,
+      // theme: ThemeData(
+      //   textTheme: const TextTheme(
+      //       headlineMedium:
+      //           TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      //   primarySwatch: Colors.blue,
+      // ),
       initialRoute: AppPages.initial,
       routes: AppPages.routes,
     );

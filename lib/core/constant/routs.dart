@@ -6,6 +6,9 @@ class AppRoute {
   static const String splash = "/splash";
   static const String lang = "/lang";
   static const String home = "/home";
+  static const String successSignUp = "/successsignUp";
+  static const String verfiyCode = "/verfiycode";
+  static const String forgetPassword = "/forgetPassword";
 
 
   /////////////////////////////////////////// قديم///////////////////////

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/auth/login_controller.dart';
-import '../../core/class/status_request.dart';
-import '../../core/constant/imageassets.dart';
-import '../../core/function/validinput.dart';
-import '../widget/auth/CustomArrow.dart';
-import '../widget/auth/CustomBackgroundPainter.dart';
-import '../widget/auth/CustomeButtonAuth.dart';
-import '../widget/auth/_buildTextField.dart';
-import '../widget/auth/image_signup_login.dart';
+import '../../../controller/auth/login_controller.dart';
+import '../../../core/class/status_request.dart';
+import '../../../core/constant/imageassets.dart';
+import '../../../core/function/validinput.dart';
+import '../../widget/auth/CustomArrow.dart';
+import '../../widget/auth/CustomBackgroundPainter.dart';
+import '../../widget/auth/CustomeButtonAuth.dart';
+import '../../widget/auth/_buildTextField.dart';
+import '../../widget/auth/image_signup_login.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

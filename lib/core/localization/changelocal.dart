@@ -1,6 +1,9 @@
 import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:second/core/services/services.dart';
 import 'package:get/get.dart';
+
+import '../constant/apptheme.dart';
 
 class LocaleController extends GetxController {
   Locale? language;
@@ -9,6 +12,15 @@ class LocaleController extends GetxController {
   ChangeLocal(String langCode) {
     Locale locale = Locale(langCode);
     myServices.sharedPreferences.setString("lang", langCode);
+    Get.updateLocale(locale);
+  }
+  ThemeData appTheme = themeEnglish;
+
+  changeLang(String langcode) {
+    Locale locale = Locale(langcode);
+    myServices.sharedPreferences.setString("lang", langcode);
+    appTheme = langcode == "ar" ? themeArabic : themeEnglish;
+    Get.changeTheme(appTheme);
     Get.updateLocale(locale);
   }
 

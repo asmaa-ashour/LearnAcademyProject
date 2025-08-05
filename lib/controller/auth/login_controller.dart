@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:second/core/class/status_request.dart';
 import 'package:second/core/constant/routs.dart';
 import 'package:second/data/datasource/remote/auth/login_data.dart';
-
 import '../../core/function/handling_data.dart';
 
 
@@ -71,5 +70,6 @@ class LoginControllerImp extends LoginController{
     password.dispose();
     super.dispose();
   }
+
 
 }
