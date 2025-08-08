@@ -4,12 +4,13 @@ import 'package:second/view/screen/auth/Login.dart';
 import 'package:second/view/screen/auth/success_signup.dart';
 import 'package:second/view/screen/auth/verifycodesignup.dart';
 import 'package:second/view/screen/home_page.dart';
+import 'package:second/view/screen/home_page/homepage.dart';
 import 'package:second/view/screen/language.dart';
 import 'package:second/view/screen/onboarding.dart';
 import 'package:second/view/screen/auth/siginUp.dart';
 import 'package:second/view/screen/splash.dart';
 class AppPages {
-  static const initial = '/logIn';
+  static const initial = '/logo';
 
   static final Map<String, Widget Function(BuildContext)> routes = {
     AppRoute.lang: (context) => const Language(),
@@ -19,10 +20,11 @@ class AppPages {
     AppRoute.signUp: (context) => const SignUp(),
     AppRoute.verfiyCode: (context) => const VerfiyCodeSignUp(),
     AppRoute.successSignUp: (context) => const SuccessSignUp(),
-    AppRoute.home: (context) => const HomePage(),
+    AppRoute.homePage: (context) => const HomePageView(),
+    AppRoute.home: (context) =>  HomePage(),
   };
 }
-//koMkMc  dsa@145A
+//
 /*
   static final routes = [
     GetPage(

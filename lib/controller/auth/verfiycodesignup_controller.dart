@@ -56,11 +56,13 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   reSend(){
     print("Resending code for id=$id, email=$emailFromResponse");
     verfiyCodeSignUpData.resendData(id,emailFromResponse);
+    Get.snackbar("note", "we again sent your activation code  succesfully");
+
   }
 
   @override
   checkCode() {
-
+//if()
   }
 
 }

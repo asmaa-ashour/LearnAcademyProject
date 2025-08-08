@@ -15,26 +15,26 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put( SignUpControllerImp());
+    Get.put(SignUpControllerImp());
     // Get.lazyput(() => SignUpControllerImp());
 
     return Scaffold(
-      body: Stack(
-        children: [
-          const CustomeImageAuth(images: ImageAsset.signUpfirstImage),
-          Positioned(
-            bottom: 0,
-            child: CustomPaint(
-              size: Size(MediaQuery.of(context).size.width, 250),
-              painter: CustomBackgroundPainter(),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: GetBuilder<SignUpControllerImp>(
-                  builder: (controller) => HandlingDataView(
-                    statusRequest: controller.statusRequest,
-                    widget: Form(
+      body: GetBuilder<SignUpControllerImp>(
+        builder: (controller) => HandlingDataView(
+          statusRequest: controller.statusRequest,
+          widget: Stack(
+            children: [
+              const CustomeImageAuth(images: ImageAsset.signUpfirstImage),
+              Positioned(
+                bottom: 0,
+                child: CustomPaint(
+                  size: Size(MediaQuery.of(context).size.width, 250),
+                  painter: CustomBackgroundPainter(),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
+                    child: Form(
                       key: controller.formstate,
                       child: Column(
                         children: [
@@ -46,37 +46,49 @@ class SignUp extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           buildTextField(
-                            valid: (val) {return validInput(val!, 4, 50, "fullname");},
+                            valid: (val) {
+                              return validInput(val!, 4, 50, "fullname");
+                            },
                             hint: "Full Name",
                             myController: controller.full_name,
                           ),
                           const SizedBox(height: 15),
                           buildTextField(
-                            valid: (val) {return validInput(val!, 11, 50,"email");},
+                            valid: (val) {
+                              return validInput(val!, 11, 50, "email");
+                            },
                             hint: "Email",
                             myController: controller.email,
                           ),
                           const SizedBox(height: 15),
                           buildTextField(
-                            valid: (val) {return validInput(val!, 6, 50," password");},
+                            valid: (val) {
+                              return validInput(val!, 6, 50, " password");
+                            },
                             hint: "Password",
                             myController: controller.password,
                           ),
                           const SizedBox(height: 25),
                           buildTextField(
-                            valid: (val) {return validInput(val!,4, 50, "username");},
+                            valid: (val) {
+                              return validInput(val!, 4, 50, "username");
+                            },
                             hint: "User Name",
                             myController: controller.username,
                           ),
                           const SizedBox(height: 25),
                           buildTextField(
-                            valid: (val) {return validInput(val!,2,4,"age");},
+                            valid: (val) {
+                              return validInput(val!, 2, 4, "age");
+                            },
                             hint: "age",
                             myController: controller.age,
                           ),
                           const SizedBox(height: 25),
                           buildTextField(
-                            valid: (val) {return validInput(val!,0,1,"gender");},
+                            valid: (val) {
+                              return validInput(val!, 0, 1, "gender");
+                            },
                             hint: "gender",
                             myController: controller.gender,
                           ),
@@ -92,9 +104,9 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

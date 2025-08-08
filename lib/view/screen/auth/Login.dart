@@ -49,7 +49,7 @@ class Login extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 20),
                                   buildTextField(
-                                    hint: "Email Address",
+                                    hint: "User Name",
                                     valid: (val) {
                                       return validInput(val!, 4, 50, " login");
                                     },
