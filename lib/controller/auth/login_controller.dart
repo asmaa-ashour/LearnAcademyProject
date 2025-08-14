@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:second/core/class/status_request.dart';
 import 'package:second/core/constant/routs.dart';
 import 'package:second/data/datasource/remote/auth/login_data.dart';
+import '../../core/constant/constant_data.dart';
 import '../../core/function/handling_data.dart';
 
 
@@ -37,6 +38,7 @@ class LoginControllerImp extends LoginController{
       if (StatusRequest.success == statusRequest) {
         print(" I now in controller");
         if (response['success'] == true) {
+          Token = response['data']['token'];
           Get.offNamed("/home");
           print(response['success']);
           print("$response ...................status");

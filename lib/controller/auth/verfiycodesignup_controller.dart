@@ -8,7 +8,7 @@ import '../../core/function/handling_data.dart';
 import '../../data/datasource/remote/auth/verfiycodesignup.dart';
 
 abstract class VerifyCodeSignUpController extends GetxController {
-  checkCode();
+  // checkCode();
   goToSuccessSignUp(String verfiyCodeSignUp);
 }
 
@@ -59,10 +59,10 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
     Get.snackbar("note", "we again sent your activation code  succesfully");
 
   }
-
-  @override
-  checkCode() {
-//if()
-  }
+  //
+  // @override
+  // checkCode() {
+  //
+  // }
 
 }

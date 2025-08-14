@@ -3,13 +3,18 @@ class AppRoute {
   static const String onBoarding = "/onboarding";
   static const String signUp =  "/signUp";
   static const String logIn = "/logIn";
+  static const String logOut = "/logOut";
   static const String splash = "/splash";
   static const String lang = "/lang";
   static const String home = "/home";
+  static const String courseDetails = "/courseDetails";
+  static const String recommendationScreen = "/recommendationScreen";
   static const String homePage = "/homePage";
   static const successSignUp = "/successsignUp";
   static const String verfiyCode = "/verfiycode";
   static const String forgetPassword = "/forgetPassword";
+  static const String profileScreen = "/profileScreen";
+  static const String course  = "/course";
 
 
   /////////////////////////////////////////// قديم///////////////////////
@@ -22,7 +27,6 @@ class AppRoute {
       "/successeditpersonalprofile";
   static const String hotelPage = "/hotelpage";
   static const String hotelDetails = "/hoteldetails";
-  static const String logOut = "/logout";
   static const String deletAccount = "/deletaccount";
   static const String checkOut = "/checkout";
   static const String pageAfterSignUpandLogin = '/PageAfterSignUpandLogin';

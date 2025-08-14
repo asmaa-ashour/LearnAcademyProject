@@ -40,8 +40,9 @@ class Crud {
     }
   }
 /////////////////////////NEW
-  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
-      var response = await http.post(Uri.parse(linkurl), body: data);
+  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data , dynamic token) async {
+      var response = await http.post(Uri.parse(linkurl), body: data ,
+        headers: {'Accept-Language': lang, 'Authorization': "Bearer$token"}, );
       print(response.statusCode) ;
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map responsebody = jsonDecode(response.body);

@@ -21,7 +21,7 @@ class SignUpData {
         "age": age,
         "full_name": full_name,
         "gender": gender,
-      },
+      },{},
     );
     return response.fold((l) => l, (r) => r);
   }

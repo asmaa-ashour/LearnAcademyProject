@@ -1,19 +1,16 @@
 import 'package:second/link_app.dart';
 import '../../../../core/class/crud.dart';
 
-class LoginData {
+class LogoutData {
   Crud crud;
-  LoginData(this.crud);
+  LogoutData(this.crud);
   postData({
-    required String username,
-    required String password,
+    required dynamic token,
   }) async {
     var response = await crud.postData(
       AppLink.login,
-      {
-        "username": username,
-        "password": password,
-      },{},
+      {},
+      {token},
     );
     return response.fold((l) => l, (r) => r);
   }
