@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518193776792",
+    "project_id": "onemallx",
+    "storage_bucket": "onemallx.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518193776792:android:74507d34f5514fdb47e8ed",
+        "android_client_info": {
+          "package_name": "com.example.second"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLBJTCih4xDzFFpDMcsYYTqDDl15bEIAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

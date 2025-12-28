@@ -16,36 +16,40 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   VerfiyCodeSignUpData verfiyCodeSignUpData = VerfiyCodeSignUpData(Get.find());
 
 
-  late int id;
-  late String emailFromResponse;
-  late String activationCode;
+  late String email;
+//  late String emailFromResponse;
+ late String activationCode;
 
   StatusRequest statusRequest = StatusRequest.none ;
 
   @override
   void onInit() {
-    id = Get.arguments['id'];
-    emailFromResponse = Get.arguments['email'];
-    activationCode = Get.arguments['activation_code'];
+    // id = Get.arguments['id'];
+    email = Get.arguments['email'];
+    print("Email received = $email");
+    //activationCode = Get.arguments['otp'];
     super.onInit();
   }
   @override
   goToSuccessSignUp(verfiyCodeSignUp) async {
     statusRequest = StatusRequest.loading;
     update();
-    var response = await verfiyCodeSignUpData.postdata(id, verfiyCodeSignUp
+    var response = await verfiyCodeSignUpData.postdata(email, verfiyCodeSignUp
     );
-    print(id);
-    print(activationCode);
-
+    print(email);
+    print(verfiyCodeSignUp);
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      if (response['success'] == true) {
+      if (response['message'] == "Account verified successfully") {
+        print("Verification response: $response");
+        print("${response['message']}");
+        print(".....................................?");
         Get.offNamed(AppRoute.successSignUp);
       } else {
         Get.defaultDialog(
             title: "ُWarning",
-            middleText: "Verify Code Not Correct");
+            middleText: "Verify Code Not Correct Please Enter Correct Code");
+        // Get.offNamed(AppRoute.verfiyCode);
         statusRequest = StatusRequest.failure;
       }
     }
@@ -53,12 +57,12 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   }
 
 
-  reSend(){
-    print("Resending code for id=$id, email=$emailFromResponse");
-    verfiyCodeSignUpData.resendData(id,emailFromResponse);
-    Get.snackbar("note", "we again sent your activation code  succesfully");
-
-  }
+  // reSend(){
+  //   print("Resending code for email=$email, activationCode=$activationCode");
+  //   verfiyCodeSignUpData.resendData(email,activationCode);
+  //   Get.snackbar("note", "we again sent your activation code  succesfully");
+  //
+  // }
   //
   // @override
   // checkCode() {

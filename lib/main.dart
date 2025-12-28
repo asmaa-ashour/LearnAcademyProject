@@ -5,9 +5,14 @@ import 'binding/initailbinding.dart';
 import 'core/localization/changelocal.dart';
 import 'core/localization/translation.dart';
 import 'core/services/services.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // 1️⃣ تهيئة Firebase
+  await Firebase.initializeApp();
+  // 2️⃣ باقي الخدمات الخاصة بتطبيقك
   await initialServices();
   runApp(const MyApp());
 }
@@ -18,12 +23,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-   LocaleController controller = Get.put(LocaleController());
+    LocaleController controller = Get.put(LocaleController());
     return GetMaterialApp(
       initialBinding: InitialBindings(),
-        translations: Translation(),
+      translations: Translation(),
       debugShowCheckedModeBanner: false,
-     locale:controller.language,
+      locale: controller.language,
       theme: controller.appTheme,
       // theme: ThemeData(
       //   textTheme: const TextTheme(

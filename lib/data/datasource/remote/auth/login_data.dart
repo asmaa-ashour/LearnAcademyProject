@@ -5,13 +5,13 @@ class LoginData {
   Crud crud;
   LoginData(this.crud);
   postData({
-    required String username,
+    required String email,
     required String password,
   }) async {
     var response = await crud.postData(
       AppLink.login,
       {
-        "username": username,
+        "email": email,
         "password": password,
       },{},
     );

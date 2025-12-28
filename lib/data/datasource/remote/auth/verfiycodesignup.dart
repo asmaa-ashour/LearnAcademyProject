@@ -4,9 +4,9 @@ import '../../../../link_app.dart';
 class VerfiyCodeSignUpData {
   Crud crud;
   VerfiyCodeSignUpData(this.crud);
-  postdata(int id, String verifycode) async {
+  postdata(String email, String verifycode) async {
     var response = await crud.postData(
-        AppLink.verifycodessignup, {"id": id.toString(), "activation_code": verifycode},{},);
+        AppLink.verifycodessignup, {"email": email, "otp": verifycode},{},);
     return response.fold((l) => l, (r) => r);
   }
 

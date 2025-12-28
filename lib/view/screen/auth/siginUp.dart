@@ -24,7 +24,7 @@ class SignUp extends StatelessWidget {
           statusRequest: controller.statusRequest,
           widget: Stack(
             children: [
-              const CustomeImageAuth(images: ImageAsset.signUpfirstImage),
+              const CustomeImageAuth(images: ImageAsset.logInThreeImagelogo2),
               Positioned(
                 bottom: 0,
                 child: CustomPaint(
@@ -61,36 +61,25 @@ class SignUp extends StatelessWidget {
                             myController: controller.email,
                           ),
                           const SizedBox(height: 15),
-                          buildTextField(
-                            valid: (val) {
-                              return validInput(val!, 6, 50, " password");
-                            },
-                            hint: "Password",
-                            myController: controller.password,
+                          GetBuilder<SignUpControllerImp>(
+                            builder: (controller) => buildTextField(
+                              hint: "Password",
+                              isPassword: true,
+                              obscureText: controller.isPasswordHidden.value,
+                              onEyeTap: controller.togglePassword,
+                              valid: (val) {
+                                return validInput(val!, 6, 50, " password");
+                              },
+                              myController: controller.password,
+                            ),
                           ),
                           const SizedBox(height: 25),
                           buildTextField(
                             valid: (val) {
-                              return validInput(val!, 4, 50, "username");
+                              return validInput(val!, 10, 11, "phone");
                             },
-                            hint: "User Name",
-                            myController: controller.username,
-                          ),
-                          const SizedBox(height: 25),
-                          buildTextField(
-                            valid: (val) {
-                              return validInput(val!, 2, 4, "age");
-                            },
-                            hint: "age",
-                            myController: controller.age,
-                          ),
-                          const SizedBox(height: 25),
-                          buildTextField(
-                            valid: (val) {
-                              return validInput(val!, 0, 1, "gender");
-                            },
-                            hint: "gender",
-                            myController: controller.gender,
+                            hint: "Phone",
+                            myController: controller.phone,
                           ),
                           const SizedBox(height: 25),
                           CustomButtonAuth(

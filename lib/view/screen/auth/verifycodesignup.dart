@@ -144,25 +144,25 @@ class VerfiyCodeSignUp extends StatelessWidget {
 
                   const SizedBox(height: 40),
 
-                  GestureDetector(
-                    onTap: () => controller.reSend(),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 24),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: AppColor.secondColor.withOpacity(0.9),
-                      ),
-                      child: const Text(
-                        "Resend verification code",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () => controller.reSend(),
+                  //   child: Container(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         vertical: 12, horizontal: 24),
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(30),
+                  //       color: AppColor.secondColor.withOpacity(0.9),
+                  //     ),
+                  //     child: const Text(
+                  //       "Resend verification code",
+                  //       style: TextStyle(
+                  //         color: Colors.white,
+                  //         fontSize: 16,
+                  //         letterSpacing: 1,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
 
                   const SizedBox(height: 20),
                 ],

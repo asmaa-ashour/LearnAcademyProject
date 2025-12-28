@@ -1,27 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class buildTextField extends StatelessWidget {
   final String hint;
   final String? Function(String?)? valid;
   final TextEditingController? myController;
-   buildTextField({
+  final bool isPassword;
+  final VoidCallback? onEyeTap;
+  final bool obscureText;
+
+  const buildTextField({
     super.key,
     required this.hint,
-     required this.myController,
-     required this.valid,
+    required this.myController,
+    required this.valid,
+    this.isPassword = false,
+    this.onEyeTap,
+    this.obscureText = false,
   });
-
-  //final bool? isPassword;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      //obscureText:isPassword,
+      obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.white54),
         filled: true,
         fillColor: Colors.white.withOpacity(0.1),
+
+        // 👁 زر الإظهار
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white70,
+                ),
+                onPressed: onEyeTap,
+              )
+            : null,
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.white54, width: 1.5),
@@ -39,7 +57,7 @@ class buildTextField extends StatelessWidget {
       ),
       style: const TextStyle(color: Colors.white, fontSize: 16),
       controller: myController,
-      validator:valid,
+      validator: valid,
     );
   }
 }

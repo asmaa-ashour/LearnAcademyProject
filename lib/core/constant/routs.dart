@@ -9,12 +9,13 @@ class AppRoute {
   static const String home = "/home";
   static const String courseDetails = "/courseDetails";
   static const String recommendationScreen = "/recommendationScreen";
-  static const String homePage = "/homePage";
+ // static const String homePage = "/homePage";
   static const successSignUp = "/successsignUp";
   static const String verfiyCode = "/verfiycode";
   static const String forgetPassword = "/forgetPassword";
   static const String profileScreen = "/profileScreen";
   static const String course  = "/course";
+  static const String Test  = "/test";
 
 
   /////////////////////////////////////////// قديم///////////////////////

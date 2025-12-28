@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
- import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:second/core/class/status_request.dart';
-import '../../view/screen/language.dart';
+import 'package:second/core/constant/constant_data.dart';
 import '../services/services.dart';
 
 class Crud {
@@ -16,10 +16,9 @@ class Crud {
     try {
       var response = await http.get(
         Uri.parse(url),
-        headers: {'Accept-Language': lang, 'Authorization': "Bearer$token"},
+        headers: {'Authorization': "Bearer$token"},
       );
       print("$token" + "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTCRUD");
-      myServices.sharedPreferences.setString("lang", lang);
       myServices.sharedPreferences.setString("step", "3");
       print("===============================================Language");
       print(myServices.sharedPreferences.setString("step", "3"));
@@ -39,27 +38,35 @@ class Crud {
       return const Left(StatusRequest.serverfailure);
     }
   }
-/////////////////////////NEW
-  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data , dynamic token) async {
-      var response = await http.post(Uri.parse(linkurl), body: data ,
-        headers: {'Accept-Language': lang, 'Authorization': "Bearer$token"}, );
-      print(response.statusCode) ;
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        Map responsebody = jsonDecode(response.body);
-        print(responsebody) ;
 
-        return Right(responsebody);
-      } else {
-        return const Left(StatusRequest.serverfailure);
-      }
+/////////////////////////NEW
+  Future<Either<StatusRequest, Map>> postData(
+      String linkurl, Map data, dynamic token) async {
+    var response = await http.post(
+      Uri.parse(linkurl),
+      body: jsonEncode(data),
+      headers: {
+        'Authorization': "Bearer $Token",
+        'Content-Type': 'application/json', // مهم جدا
+      },
+    );
+    print(response.statusCode);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map responsebody = jsonDecode(response.body);
+      print(responsebody);
+
+      return Right(responsebody);
+    } else {
+      return const Left(StatusRequest.serverfailure);
     }
+  }
 
   ///////////////////////////////////////////////////////////////////////////////
-  Future<Either<StatusRequest, Map>> postedData(
-      {required String url,
-      required Map<String, dynamic> body,
-     // @required dynamic token
-      }) async {
+  Future<Either<StatusRequest, Map>> postedData({
+    required String url,
+    required Map<String, dynamic> body,
+    // @required dynamic token
+  }) async {
     try {
       print(url);
       print(body);

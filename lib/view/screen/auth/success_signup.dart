@@ -95,7 +95,7 @@ class SuccessSignUp extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                     child: Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.celebration,
                           size: 120,
                           color: AppColor.secondColor,

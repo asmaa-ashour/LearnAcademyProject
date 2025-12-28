@@ -11,7 +11,7 @@ class CustomeImageAuth extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(images),
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
         ),
       ),
     );

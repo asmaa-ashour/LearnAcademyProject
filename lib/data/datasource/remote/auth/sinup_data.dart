@@ -4,23 +4,19 @@ import '../../../../core/class/crud.dart';
 class SignUpData {
   Crud crud;
   SignUpData(this.crud);
-  postData({
-    required String username,
+  postData( {
     required String email,
     required String password,
-    required String age,
     required String full_name,
-    required String gender,
+    required String phone,
   }) async {
     var response = await crud.postData(
       AppLink.signUp,
        {
-        "username": username,
+        "phone": phone,
         "email": email,
         "password": password,
-        "age": age,
-        "full_name": full_name,
-        "gender": gender,
+        "name": full_name,
       },{},
     );
     return response.fold((l) => l, (r) => r);

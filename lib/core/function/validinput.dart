@@ -1,6 +1,12 @@
 import 'package:get/get.dart';
 
 validInput(String val, int min, int max, String type) {
+
+  if(type=="phone"){
+    if (val.length < 10) {
+      return 'phone must be 10 character';
+    }
+  }
   if (type == "username") {
     if (val.isEmpty) {
       return "can't be Empty";}
@@ -53,7 +59,7 @@ if(type=="password"){
     }
   if (type =="login"){
     if (val.isEmpty) {
-      return 'not valid full name';
+      return 'not valid email';
     }
     else{
       return 'Not Correct';
