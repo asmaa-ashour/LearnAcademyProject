@@ -57,4 +57,25 @@ class ApiService {
       return null;
     }
   }
+
+  static Future<List<Complaint>> getComplaints(String token) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/getComplaintsCitizen'),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $Token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      // الوصول إلى قائمة الشكاوى داخل المفتاح "complaints"
+      List complaintsList = jsonData['complaints'] ?? [];
+      return complaintsList.map((c) => Complaint.fromJson(c)).toList();
+    } else {
+      print('Error: ${response.statusCode} - ${response.body}');
+      return [];
+    }
+  }
 }

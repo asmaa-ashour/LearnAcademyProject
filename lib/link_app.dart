@@ -9,9 +9,10 @@ class AppLink {
   static const String verifycodessignup = "$serverLink/verifyOtp";
 
   //===================== images ===========================back
-  static const String imagestatic = "http://192.168.137.167:8050";
+  static const String imagestatic = "http://192.168.1.110:8000/";
 
-  static const String imagecategories = "$imagestatic/images/category/";
+  static const String imagecategories =
+      "$imagestatic/storage/complaints_photos/";
 
   static const String imageitemes = "$imagestatic/images/category";
 }

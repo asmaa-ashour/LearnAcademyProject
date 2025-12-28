@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:second/view/screen/home_page/ComplaintDetailsView%20.dart';
 
 import '../../../controller/ComplaintController.dart';
 import '../../../core/constant/constant_data.dart';
@@ -40,62 +41,67 @@ class ComplaintsListView extends StatelessWidget {
           itemBuilder: (context, index) {
             var c = controller.complaints[index];
 
-            return Card(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              elevation: 4,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // عنوان الشكوى
-                    Row(
-                      children: [
-                        const Icon(Icons.report, color: Colors.red, size: 28),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            c.type,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+            return InkWell(
+              onTap: () {
+                Get.to(() => ComplaintDetailsView(complaint: c));
+              },
+              child: Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // عنوان الشكوى
+                      Row(
+                        children: [
+                          const Icon(Icons.report, color: Colors.red, size: 28),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              c.type,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        _statusBadge(c.status),
-                      ],
-                    ),
+                          _statusBadge(c.status),
+                        ],
+                      ),
 
-                    const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                    // الوصف
-                    Text(
-                      c.description,
-                      style:
-                          const TextStyle(fontSize: 16, color: Colors.black87),
-                    ),
+                      // الوصف
+                      Text(
+                        c.description,
+                        style: const TextStyle(
+                            fontSize: 16, color: Colors.black87),
+                      ),
 
-                    const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on, color: Colors.blue),
-                        const SizedBox(width: 5),
-                        Text(
-                          c.location,
-                          style: const TextStyle(
-                              fontSize: 15, color: Colors.black54),
-                        ),
-                      ],
-                    ),
+                      Row(
+                        children: [
+                          const Icon(Icons.location_on, color: Colors.blue),
+                          const SizedBox(width: 5),
+                          Text(
+                            c.location,
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black54),
+                          ),
+                        ],
+                      ),
 
-                    const SizedBox(height: 12),
+                      const SizedBox(height: 12),
 
-                    // صور الشكوى إن وُجدت
-                  ],
+                      // صور الشكوى إن وُجدت
+                    ],
+                  ),
                 ),
               ),
             );
