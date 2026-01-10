@@ -38,4 +38,39 @@ class ComplaintController extends GetxController {
     }
     isLoading.value = false;
   }
+
+  Future<void> updateComplaint({
+  required int id,
+  required String type,
+  required String description,
+  required String department,
+  required String location,
+  required List<String> photoPaths,
+}) async {
+  isLoading.value = true;
+
+  var updatedComplaint = await ApiService.updateComplaint(
+    id: id,
+    type: type,
+    description: description,
+    department: department,
+    location: location,
+    photoPaths: photoPaths,
+  );
+
+  if (updatedComplaint != null) {
+    int index = complaints.indexWhere((c) => c.id == id);
+    if (index != -1) {
+      complaints[index] = updatedComplaint; // تحديث القائمة
+    }
+
+    Get.back();
+    Get.snackbar("Success", "Complaint updated successfully");
+  } else {
+    Get.snackbar("Error", "Failed to update complaint");
+  }
+
+  isLoading.value = false;
+}
+
 }

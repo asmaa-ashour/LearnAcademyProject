@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/data/datasource/remote/auth/logout_data.dart';
 import '../../core/class/status_request.dart';
 import '../../core/constant/constant_data.dart';
@@ -11,7 +12,6 @@ abstract class LogOutController extends GetxController {
 }
 
 class LogOutControllerImp extends LogOutController {
-
   StatusRequest statusRequest = StatusRequest.none;
   LogoutData logoutData = LogoutData(Get.find());
   @override
@@ -24,26 +24,26 @@ class LogOutControllerImp extends LogOutController {
               onPressed: () async {
                 statusRequest = StatusRequest.loading;
                 var response = await logoutData.postData(
-                  token:'$Token',
+                  token: '${CacheClass.getData(key: "Token")}',
                 );
-                print("$Token");
+                print("${CacheClass.getData(key: "Token")}");
                 statusRequest = handlingData(response);
                 if (StatusRequest.success == statusRequest) {
-                if (response['success'] == true) {
-                  Get.snackbar("Aleart", "your are logged-out successfully");
-                  Get.offNamed(AppRoute.logIn);
-                } else {
-                  Get.snackbar("Warning", "Unauthenticated");
-                }
+                  if (response['success'] == true) {
+                    Get.snackbar("Aleart", "your are logged-out successfully");
+                    Get.offNamed(AppRoute.logIn);
+                  } else {
+                    Get.snackbar("Warning", "Unauthenticated");
+                  }
                 }
                 update();
               },
-              child:const Text("Yes")),
+              child: const Text("Yes")),
           ElevatedButton(
               onPressed: () {
                 Get.back();
               },
-              child:const Text("No"))
+              child: const Text("No"))
         ]);
   }
 }

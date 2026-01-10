@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/core/class/status_request.dart';
 import 'package:second/core/constant/routs.dart';
 import 'package:second/data/datasource/remote/auth/login_data.dart';
@@ -44,8 +45,18 @@ class LoginControllerImp extends LoginController {
       if (StatusRequest.success == statusRequest) {
         print(".................................... I now in controller");
         if (response['message'] == "Login successful") {
-          Token = response['token'];
-          Get.offNamed("/home");
+          // Token = response['token'];
+          String token = response['token'];
+
+// حفظ التوكن بالكاش
+          await CacheClass.setData(key: "Token", value: token);
+
+// (اختياري) حفظ حالة تسجيل الدخول
+          await CacheClass.setData(key: "isLoggedIn", value: true);
+
+// الانتقال للصفحة الرئيسية
+          Get.offAllNamed(AppRoute.home);
+
           print(response['message']);
           print("$response ...................status");
           data.addAll((response['user']));

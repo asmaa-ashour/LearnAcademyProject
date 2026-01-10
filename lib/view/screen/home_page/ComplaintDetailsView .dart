@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:second/view/screen/home_page/updatComplaint.dart';
 import '../../../data/model/ComplaintModel.dart';
 
 class ComplaintDetailsView extends StatelessWidget {
@@ -18,6 +19,29 @@ class ComplaintDetailsView extends StatelessWidget {
           title: const Text("تفاصيل الشكوى"),
           backgroundColor: const Color(0xFF002623),
           centerTitle: true,
+          actions: [
+            const SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.edit),
+                label: const Text(
+                  "تعديل الشكوى",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF135D66),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () {
+                  Get.to(() => UpdateComplaintView(complaint: complaint));
+                },
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

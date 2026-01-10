@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/link_app.dart';
 
 import '../core/constant/constant_data.dart';
@@ -17,7 +18,7 @@ class ApiService {
   }) async {
     var headers = {
       'Accept': 'application/json',
-      'Authorization': 'Bearer $Token'
+      'Authorization': 'Bearer ${CacheClass.getData(key: "Token")}'
     };
 
     var request = http.MultipartRequest(
@@ -64,7 +65,7 @@ class ApiService {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $Token',
+        'Authorization': 'Bearer ${CacheClass.getData(key: "Token")}',
       },
     );
 
@@ -78,4 +79,52 @@ class ApiService {
       return [];
     }
   }
+  
+  static Future<Complaint?> updateComplaint({
+  required int id,
+  required String type,
+  required String description,
+  required String department,
+  required String location,
+  required List<String> photoPaths,
+}) async {
+  var headers = {
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ${CacheClass.getData(key: "Token")}',
+  };
+
+  var request = http.MultipartRequest(
+    'POST', // أو PUT حسب الباك
+    Uri.parse('$baseUrl/updateComplaint/$id'),
+  );
+
+  request.headers.addAll(headers);
+
+  request.fields.addAll({
+    'type': type,
+    'description': description,
+    'department': department,
+    'location': location,
+  });
+
+  for (String path in photoPaths) {
+    request.files.add(
+      await http.MultipartFile.fromPath('photos[]', path),
+    );
+  }
+
+  var response = await request.send();
+  var data = await response.stream.bytesToString();
+
+  print(response.statusCode);
+  print(data);
+
+  if (response.statusCode == 200) {
+    var jsonData = jsonDecode(data);
+    return Complaint.fromJson(jsonData['complaint']);
+  } else {
+    return null;
+  }
+}
+
 }

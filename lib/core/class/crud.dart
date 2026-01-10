@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/core/class/status_request.dart';
 import 'package:second/core/constant/constant_data.dart';
 import '../services/services.dart';
@@ -16,7 +17,9 @@ class Crud {
     try {
       var response = await http.get(
         Uri.parse(url),
-        headers: {'Authorization': "Bearer$token"},
+        headers: {
+          'Authorization': "Bearer ${CacheClass.getData(key: "Token")}"
+        }, // Use cached token
       );
       print("$token" + "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTCRUD");
       myServices.sharedPreferences.setString("step", "3");
@@ -46,7 +49,7 @@ class Crud {
       Uri.parse(linkurl),
       body: jsonEncode(data),
       headers: {
-        'Authorization': "Bearer $Token",
+        'Authorization': "Bearer ${CacheClass.getData(key: "Token")}",
         'Content-Type': 'application/json', // مهم جدا
       },
     );

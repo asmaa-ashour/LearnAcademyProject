@@ -55,30 +55,14 @@ class SignUpControllerImp extends SignUpController {
           //بدا حذف اتوقع
           Get.snackbar("Done",
               "Your account has been created successfully please activate your account now");
-
-          //  id=response['data']['id'];
-          //////////////////////////////////////////////////////////////////
-          // بعد نجاح التسجيل، احصل على القيم من response:
-          // id = response["data"]["id"];
           emaile = response["email"];
-          //   activationCode = response["otp"];
-
-// ثم انتقل إلى صفحة التفعيل مع تمرير القيم:
-//           Get.toNamed(AppRoute.verfiyCode, arguments: {
-//             "email": email,
-//           });
-
           Get.toNamed(AppRoute.verfiyCode, arguments: {
             "email": emaile,
-
-            // "otp": activationCode, // من الريسبونس
           });
 
           ///////////////////////////////////////////////////////////////
           print(response['email']);
           print("$response ...................status");
-          // data.addAll((response['data']));
-          // Get.offNamed(AppRoute.verfiyCode);
         } else if (response['message'] ==
             "The email has already been taken. (and 1 more error)") {
           Get.snackbar("Warning", "The email has already been taken.");
@@ -87,12 +71,10 @@ class SignUpControllerImp extends SignUpController {
           Get.snackbar("Warning", "The phone has already been taken.");
           Get.toNamed(AppRoute.signUp);
         }
-        // else if (response['message'] ==
-        //     "The password field format is invalid.") {
-        //   Get.snackbar("Warning", "The password field format is invalid.");
-        // }
       }
-    } else {}
+    } else {
+      Get.toNamed(AppRoute.signUp);
+    }
     update();
   }
 
