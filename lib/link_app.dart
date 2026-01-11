@@ -1,5 +1,5 @@
 class AppLink {
-  static const String serverLink = "http://10.65.11.7:8000/api";
+  static const String serverLink = "http://10.65.1.78:8000/api";
 
   // =============================Auth=====================//
   static const String signUp = "$serverLink/register";

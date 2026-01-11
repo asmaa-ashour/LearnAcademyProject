@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/route.dart';
 import 'binding/initailbinding.dart';
@@ -25,7 +26,11 @@ Future<void> main() async {
   // 1️⃣ تهيئة Firebase
   await Firebase.initializeApp();
   await CacheClass.cacheIniti();
+// 1. تهيئة Hive
+  await Hive.initFlutter();
 
+  // 2. فتح الصندوق (هذا السطر الذي ينقصك غالباً)
+  await Hive.openBox('complaintsBox');
   // 2️⃣ باقي الخدمات الخاصة بتطبيقك
   await initialServices();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

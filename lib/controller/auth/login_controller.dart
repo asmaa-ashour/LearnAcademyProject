@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:second/core/class/cacheClass%20.dart';
 import 'package:second/core/class/status_request.dart';
@@ -31,43 +32,54 @@ class LoginControllerImp extends LoginController {
   }
 
   @override
+  @override
   login() async {
     if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
-      update();
+      update(); // لإظهار مؤشر التحميل
+
       var response = await loginData.postData(
         email: email.text,
         password: password.text,
       );
-      print(".............................controller $response ");
+
+      print("Response logic: $response");
       statusRequest = handlingData(response);
 
       if (StatusRequest.success == statusRequest) {
-        print(".................................... I now in controller");
-        if (response['message'] == "Login successful") {
-          // Token = response['token'];
+        // هنا السيرفر رد بـ 200 OK
+        if (response['status'] == "success" ||
+            response['message'] == "Login successful") {
           String token = response['token'];
-
-// حفظ التوكن بالكاش
           await CacheClass.setData(key: "Token", value: token);
-
-// (اختياري) حفظ حالة تسجيل الدخول
           await CacheClass.setData(key: "isLoggedIn", value: true);
-
-// الانتقال للصفحة الرئيسية
           Get.offAllNamed(AppRoute.home);
-
-          print(response['message']);
-          print("$response ...................status");
-          data.addAll((response['user']));
-          print(data);
-          Get.offNamed(AppRoute.home);
         } else {
-          Get.snackbar("Warning", "Email Or Password Not Correct");
+          // السيرفر رد بـ 200 لكن بيانات الدخول غلط (حسب تصميم الـ API)
+          _showErrorDialog();
+          statusRequest = StatusRequest.none;
         }
+      } else {
+        // هنا الحالة ليست success (ممكن 401 أو 500)
+        // إذا كان الباك إند يرسل 401 عند خطأ الباسورد، الدايلوغ يجب أن يظهر هنا
+        _showErrorDialog();
+        statusRequest = StatusRequest.none;
       }
-    } else {}
-    update();
+      update(); // لتحديث الواجهة وإخفاء التحميل
+    }
+  }
+
+  void _showErrorDialog() {
+    Get.defaultDialog(
+      title: "خطأ في الدخول",
+      middleText: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      backgroundColor: Colors.white,
+      titleStyle: TextStyle(color: Colors.red),
+      textConfirm: "حاول مجدداً",
+      confirmTextColor: Colors.white,
+      buttonColor: Colors.red,
+      onConfirm: () => Get.back(),
+    );
   }
 
   @override

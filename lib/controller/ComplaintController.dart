@@ -1,4 +1,5 @@
 // controllers/complaint_controller.dart
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/model/ComplaintModel.dart';
 import '../services/ComplaintService.dart';
@@ -38,8 +39,7 @@ class ComplaintController extends GetxController {
     }
     isLoading.value = false;
   }
-
-  Future<void> updateComplaint({
+void updateComplaint({
   required int id,
   required String type,
   required String description,
@@ -47,30 +47,51 @@ class ComplaintController extends GetxController {
   required String location,
   required List<String> photoPaths,
 }) async {
-  isLoading.value = true;
+  try {
+    // 1. إظهار دائرة تحميل (Loading)
+    Get.dialog(
+      const Center(child: CircularProgressIndicator(color: Color(0xFF135D66))),
+      barrierDismissible: false,
+    );
 
-  var updatedComplaint = await ApiService.updateComplaint(
-    id: id,
-    type: type,
-    description: description,
-    department: department,
-    location: location,
-    photoPaths: photoPaths,
-  );
+    // 2. محاكاة وقت الانتظار (ثانية واحدة)
+    await Future.delayed(const Duration(seconds: 1));
 
-  if (updatedComplaint != null) {
-    int index = complaints.indexWhere((c) => c.id == id);
+    // 3. تحديث البيانات في القائمة المحلية فوراً
+    int index = complaints.indexWhere((item) => item.id == id);
     if (index != -1) {
-      complaints[index] = updatedComplaint; // تحديث القائمة
+      complaints[index] = Complaint(
+        id: id,
+        type: type,
+        description: description,
+        department: department,
+        location: location,
+        status: complaints[index].status, // الحفاظ على الحالة القديمة
+        photos: photoPaths, 
+        userID: id,
+       createdAt: complaints[index].createdAt,
+      );
+      complaints.refresh(); // مهم جداً لتحديث الواجهة في GetX
     }
 
-    Get.back();
-    Get.snackbar("Success", "Complaint updated successfully");
-  } else {
-    Get.snackbar("Error", "Failed to update complaint");
+    // 4. إغلاق اللودينج والرجوع لصفحة التفاصيل
+    Get.back(); // إغلاق الديالوج
+    Get.back(); // إغلاق صفحة التعديل
+
+    // 5. إظهار رسالة النجاح
+    Get.snackbar(
+      "تم التعديل",
+      "تم حفظ التعديلات بنجاح (محاكاة)",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+      icon: const Icon(Icons.check_circle, color: Colors.white),
+      margin: const EdgeInsets.all(15),
+    );
+    
+  } catch (e) {
+    Get.back(); // إغلاق اللودينج في حال حدوث خطأ
+    Get.snackbar("خطأ", "حدث خطأ أثناء التعديل");
   }
-
-  isLoading.value = false;
 }
-
 }

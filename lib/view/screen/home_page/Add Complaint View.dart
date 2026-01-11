@@ -9,7 +9,7 @@ class AddComplaintView extends StatelessWidget {
 
   final descController = TextEditingController();
   final locationController = TextEditingController();
-  final departmentController = TextEditingController();
+  //final departmentController = TextEditingController();
 
   final List<String> complaintTypes = [
     "صحة",
@@ -23,6 +23,17 @@ class AddComplaintView extends StatelessWidget {
   ];
 
   final RxString selectedType = "صحة".obs;
+  final List<Map<String, String>> departments = [
+    {'key': 'Interior', 'label': 'الداخلية'},
+    {'key': 'Health', 'label': 'الصحة'},
+    {'key': 'Education', 'label': 'التربية'},
+    {'key': 'Justice', 'label': 'العدل'},
+    {'key': 'AntiCorruption', 'label': 'مكافحة الفساد'},
+    {'key': 'Communications', 'label': 'الاتصالات'},
+    {'key': 'Labor', 'label': 'العمل'},
+    {'key': 'ConsumerProtection', 'label': 'حماية المستهلك'},
+  ];
+  final RxString selectedDepartment = 'Health'.obs;
   final RxList<XFile> selectedImages = <XFile>[].obs;
 
   final ImagePicker picker = ImagePicker();
@@ -85,12 +96,17 @@ class AddComplaintView extends StatelessWidget {
                       // نوع الشكوى
                       Obx(() => DropdownButtonFormField<String>(
                             value: selectedType.value,
-                            decoration:
-                                _inputDecoration("نوع الشكوى", Icons.category),
+                            isExpanded: true, // لضمان عدم خروج النص عن الحواف
+                            icon: const Icon(
+                                Icons.arrow_drop_down_circle_outlined,
+                                color: Color(0xFF135D66)),
+                            decoration: _inputDecoration(
+                                "نوع الشكوى", Icons.category_rounded),
                             items: complaintTypes
                                 .map((type) => DropdownMenuItem(
                                       value: type,
-                                      child: Text(type),
+                                      child: Text(type,
+                                          style: const TextStyle(fontSize: 15)),
                                     ))
                                 .toList(),
                             onChanged: (value) {
@@ -109,10 +125,27 @@ class AddComplaintView extends StatelessWidget {
                       const SizedBox(height: 16),
 
                       // القسم
-                      TextField(
-                        controller: departmentController,
-                        decoration: _inputDecoration("القسم", Icons.apartment),
-                      ),
+                      Obx(() => DropdownButtonFormField<String>(
+                            value: selectedDepartment.value,
+                            isExpanded: true,
+                            icon: const Icon(
+                                Icons.arrow_drop_down_circle_outlined,
+                                color: Color(0xFF135D66)),
+                            decoration: _inputDecoration(
+                                "الجهة المختصة (القسم)",
+                                Icons.account_balance_rounded),
+                            items: departments
+                                .map((d) => DropdownMenuItem(
+                                      value: d['key'],
+                                      child: Text(d['label']!,
+                                          style: const TextStyle(fontSize: 15)),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              if (value != null)
+                                selectedDepartment.value = value;
+                            },
+                          )),
                       const SizedBox(height: 16),
 
                       // الموقع
@@ -220,7 +253,7 @@ class AddComplaintView extends StatelessWidget {
                             controller.addComplaint(
                               type: selectedType.value,
                               description: descController.text,
-                              department: departmentController.text,
+                              department: selectedDepartment.value,
                               location: locationController.text,
                               photoPaths:
                                   selectedImages.map((x) => x.path).toList(),
@@ -251,12 +284,25 @@ class AddComplaintView extends StatelessWidget {
   InputDecoration _inputDecoration(String label, IconData icon) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon),
+      labelStyle: const TextStyle(
+          color: Color(0xFF003C43), fontWeight: FontWeight.w500),
+      prefixIcon: Icon(icon, color: const Color(0xFF135D66)),
       filled: true,
       fillColor: const Color(0xFFF9FAFB),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16), // زوايا أنعم
         borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(
+            color: Colors.grey.shade200, width: 1), // حدود خفيفة جداً
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(
+            color: Color(0xFF135D66), width: 1.5), // تحديد عند الكتابة
       ),
     );
   }

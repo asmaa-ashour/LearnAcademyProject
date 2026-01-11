@@ -16,7 +16,6 @@ class ComplaintsListView extends StatelessWidget {
       backgroundColor: const Color(0xFFF4F6F8),
       body: Column(
         children: [
-          // ===== Header =====
           Container(
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(24, 60, 24, 40),
@@ -29,8 +28,8 @@ class ComplaintsListView extends StatelessWidget {
                 bottomRight: Radius.circular(32),
               ),
             ),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.list_alt, color: Colors.white, size: 34),
                 SizedBox(width: 12),
                 Text(
@@ -183,25 +182,27 @@ class ComplaintsListView extends StatelessWidget {
   Widget _statusBadge(String status) {
     late Color bg;
     late String label;
-
     switch (status) {
-      case "pending":
+      case "new": // الحالة الجديدة التي أضفتها في الباك إند
         bg = Colors.orange;
         label = "قيد الانتظار";
         break;
-      case "in_progress":
+      case "inProgress":
         bg = Colors.blue;
         label = "قيد المعالجة";
         break;
-      case "resolved":
+      case "completed":
         bg = Colors.green;
         label = "تم الحل";
+        break;
+      case "rejected": // الرفض يفضل أن يكون بلون مختلف مثل الأحمر
+        bg = Colors.red;
+        label = "مرفوضة";
         break;
       default:
         bg = Colors.grey;
         label = status;
     }
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
